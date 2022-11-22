@@ -1,0 +1,72 @@
+create database 1bm21cs063_bank;
+use 1bm21cs063_bank;
+create table branch(
+branch_name varchar(20),
+branch_city varchar(10),
+assets real,
+primary key(branch_name)
+);
+create table bankcustomer(
+customer_name varchar(20),
+customer_street varchar(20),
+customer_city varchar(15),
+primary key(customer_name)
+);
+create table loan(
+loan_no int,
+branch_name varchar(20),
+amount real,
+primary key (loan_no),
+foreign key (branch_name) references branch(branch_name)
+on update cascade on delete cascade
+);
+create table bankaccount(
+accno int,
+branch_name varchar(20),
+balance real,
+primary key(accno),
+foreign key(branch_name) references branch(branch_name)
+on update cascade on delete cascade
+);
+create table depositer(
+customer_name varchar(20),
+accno int,
+foreign key(customer_name) references bankcustomer(customer_name)
+on update cascade on delete cascade ,
+foreign key(accno) references bankaccount(accno)
+on update cascade on delete cascade 
+);
+
+insert into branch values('sbi_chamrajpet','bangalore',50000);
+insert into branch values('sbi_residencyroad','bangalore',10000);
+insert into branch values('sbi_shivajiroad','bombay',20000);
+insert into branch values('sbi_parliamentroad','delhi',10000);
+insert into branch values('sbi_jantarmantar','delhi',20000);
+select * from branch;
+insert into bankaccount values(1,'sbi_chamrajpet',2000);
+insert into bankaccount values(2,'sbi_residencyroad',5000);
+insert into bankaccount values(3,'sbi_shivajiroad',6000);
+insert into bankaccount values(4,'sbi_parliamentroad',9000);
+insert into bankaccount values(5,'sbi_jantarmantar',8000);
+insert into bankaccount values(6,'sbi_shivajiroad',4000);
+insert into bankaccount values(7,'sbi_residencyroad',4000);
+insert into bankaccount values(8,'sbi_parliamentroad',3000);
+insert into bankaccount values(9,'sbi_residencyroad',5000);
+insert into bankaccount values(10,'sbi_jantarmantar',2000);
+select * from bankaccount;
+insert into bankcustomer values('avinash','bull_temple_road','bangalore');
+insert into bankcustomer values('dinesh','bannergatta_road','bangalore');
+insert into bankcustomer values('mohan','nationalcollege_road','bangalore');
+insert into bankcustomer values ('nikhil','akbar_road','delhi');
+insert into bankcustomer values ('ravi','prithiviraj_road','delhi');
+select *from bankcustomer
+insert into depositer values('avinash',1);
+insert into depositer values ('dinesh',2);
+insert into depositer values('nikhil',4);
+insert into depositer values('ravi',5);
+insert into depositer values('avinash',8);
+insert into depositer values ('nikhil',9);
+insert into depositer values ('dinesh',10);
+insert into depositer values('nikhil',11);
+select * from depositer;
+
