@@ -1,0 +1,78 @@
+create database employee1;
+use employee1;
+
+create table dept(
+dept_no int,
+d_name varchar(10),
+d_loc varchar(20),
+primary key(dept_no)
+);
+create table emp(
+emp_no int,
+e_name varchar(10),
+mgr_no int,
+hiredate date,
+sal real,
+dept_no int,
+primary key(emp_no),
+foreign key (dept_no) references dept(dept_no)
+);
+create table incentives(
+emp_no int,
+incentive_date date,
+incentive_amount real,
+primary key(incentive_date),
+foreign key (emp_no) references emp(emp_no)
+);
+create table project(
+p_no int,
+p_name varchar(20),
+p_loc varchar(20),
+primary key(p_no)
+);
+create table assigned_to(
+emp_no int,
+p_no int,
+job_role varchar(20),
+foreign key (emp_no) references emp(emp_no),
+foreign key (p_no) references project(p_no)
+);
+insert into dept values(1,'CSE','Siddapur');
+insert into dept values(2,'ISE','Sirsi');
+insert into dept values(3,'ECE','Pune');
+insert into dept values(4,'EEE','Hubli');
+insert into dept values(5,'IM','Mumbai');
+insert into dept values(6,'BT','Goa');
+select *from dept;
+
+insert into emp values(1,'Akash',7,'2020-01-12',20000,4);
+insert into emp values(2,'Bhuvan',8,'2020-03-14',40000,1);
+insert into emp values(3,'Chris',9,'2021-02-25',35000,2);
+insert into emp values(4,'Kiran',10,'2021-11-30',60000,6);
+insert into emp values(5,'Pavan',11,'2022-3-10',52000,3);
+insert into emp values(6,'Santosh',12,'2022-5-24',48000,5);
+select *from emp;
+
+insert into project values(1,'pro1','Bengaluru');
+insert into project values(2,'pro2','Pune');
+insert into project values(3,'pro3','Hyderabad');
+insert into project values(4,'pro4','Kerala');
+insert into project values(5,'pro5','Mysuru');
+insert into project values(6,'pro6','Sirsi');
+select *from project;
+
+insert into incentives values(1,'2021-01-12',15000);
+insert into incentives values(2,'2021-12-12',8000);
+insert into incentives values(3,'2022-06-09',6500);
+insert into incentives values(4,'2022-11-29',11000);
+insert into incentives values(5,'2023-05-30',9800);
+insert into incentives values(6,'2023-08-17',7000);
+select *from incentives;
+
+insert into assigned_to values(1,1,'Developer');
+insert into assigned_to values(2,2,'Assistant');
+insert into assigned_to values(3,3,'Co-assistant');
+insert into assigned_to values(4,4,'Organiser');
+insert into assigned_to values(5,5,'Manager');
+insert into assigned_to values(6,6,'Supervisor');
+select *from assigned_to;
